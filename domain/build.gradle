@@ -3,6 +3,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation project(":base")
+    implementation project(":model")
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.rxJava
     implementation Dependencies.rxKotlin
