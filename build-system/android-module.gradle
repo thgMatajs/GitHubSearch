@@ -1,0 +1,60 @@
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+    maven { url 'https://maven.fabric.io/public' }
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion BuildVersions.compileSdk
+    buildToolsVersion BuildVersions.buildTools
+
+    defaultConfig {
+        minSdkVersion BuildVersions.minSdk
+        targetSdkVersion BuildVersions.targetSdk
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            manifestPlaceholders = [applicationLabel: " - Staging"]
+            versionNameSuffix "-debug"
+            buildConfigField "String", "BASE_URL", BASE_DEBUG_API
+            debuggable true
+            minifyEnabled false
+        }
+
+        release {
+            manifestPlaceholders = [applicationLabel: ""]
+            debuggable false
+            minifyEnabled true
+            buildConfigField "String", "BASE_URL", BASE_PROD_API
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/main.kotlin_module'
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+
+}
