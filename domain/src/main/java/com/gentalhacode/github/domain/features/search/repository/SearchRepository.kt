@@ -7,5 +7,5 @@ import io.reactivex.Flowable
  * .:.:.:. Created by @thgMatajs on 11/02/20 .:.:.:.
  */
 interface SearchRepository {
-    fun getRepositoriesBy(language: String): Flowable<Repository>
+    fun getRepositoriesBy(language: String): Flowable<List<Repository>>
 }
