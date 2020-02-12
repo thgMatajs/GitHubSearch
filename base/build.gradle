@@ -5,7 +5,6 @@ dependencies {
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.rxJava
     implementation Dependencies.rxKotlin
-    implementation Dependencies.koin
 
     implementation Dependencies.retrofit
     implementation Dependencies.gson
@@ -14,6 +13,3 @@ dependencies {
     implementation Dependencies.okhttp
     implementation Dependencies.okhttpLogger
 }
-
-sourceCompatibility = "8"
-targetCompatibility = "8"
