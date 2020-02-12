@@ -6,6 +6,13 @@ dependencies {
     implementation Dependencies.rxJava
     implementation Dependencies.rxKotlin
     implementation Dependencies.koin
+
+    implementation Dependencies.retrofit
+    implementation Dependencies.gson
+    implementation Dependencies.gsonConverter
+    implementation Dependencies.rxJavaRetrofit
+    implementation Dependencies.okhttp
+    implementation Dependencies.okhttpLogger
 }
 
 sourceCompatibility = "8"
