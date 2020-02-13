@@ -3,10 +3,15 @@ apply plugin: 'kotlin'
 dependencies {
     implementation project(":base")
     implementation project(":model")
+    implementation project(":domain")
+
     implementation Dependencies.kotlinStdLib
+
     implementation Dependencies.rxJava
     implementation Dependencies.rxKotlin
+
     implementation Dependencies.koin
+
     testImplementation TestDependencies.mockitoKotlin
     testImplementation TestDependencies.jUnit
     testImplementation TestDependencies.assertJ
