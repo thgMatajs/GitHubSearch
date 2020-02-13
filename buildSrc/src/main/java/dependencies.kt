@@ -99,6 +99,7 @@ object TestDependencies {
 
     val roomTesting = "androidx.room:room-testing:$${Versions.room}"
 
+    val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${TestVersions.mockitoKotlin}"
 
     val androidTestCore = "androidx.test:core:${TestVersions.androidTestArchCore}"
     val androidTestRunner = "androidx.test:runner:${TestVersions.androidTextRunner}"

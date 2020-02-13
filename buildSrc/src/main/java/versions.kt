@@ -65,4 +65,5 @@ internal object TestVersions {
     const val androidTextRules = "1.1.0"
     const val androidTextRunner = "1.1.0"
     const val coreTesting = "2.1.0"
+    val mockitoKotlin = "2.0.0-RC3"
 }

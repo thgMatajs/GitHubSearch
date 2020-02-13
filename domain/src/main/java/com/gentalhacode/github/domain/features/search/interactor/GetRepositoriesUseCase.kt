@@ -16,7 +16,8 @@ class GetRepositoriesUseCase(
 
     override fun buildUseCaseFlowable(params: String?): Flowable<List<Repository>> {
         return params?.let { language ->
-            repository.getRepositoriesBy(language)
-        } ?: repository.getRepositoriesBy("kotlin")
+            repository.getRepositoriesBy(language).takeIf { language.isNotBlank() }
+                ?: Flowable.error(IllegalArgumentException("Parameter can not be blank"))
+        } ?: Flowable.error(IllegalArgumentException("Parameter can not be null"))
     }
 }
