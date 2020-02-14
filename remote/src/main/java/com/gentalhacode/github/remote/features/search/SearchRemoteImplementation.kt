@@ -13,11 +13,8 @@ class SearchRemoteImplementation(
 ) : SearchRemote {
 
     override fun getRepositoriesBy(language: String): Flowable<List<Repository>> {
-        val params = "language:${language.takeIf { it.isNotBlank() } ?: "kotlin"}"
-        return service.getRepositoriesBy(params).map { response ->
-            response.repositories.map { remoteRepository ->
-                remoteRepository as Repository
-            }
-        }.toFlowable()
+        return service.getRepositoriesBy(language).map { response ->
+            response.repositories
+        }
     }
 }

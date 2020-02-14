@@ -26,10 +26,10 @@ object DataFactory {
         totalForks = randomInt(),
         totalStars = randomInt(),
         id = randomLong(),
-        owner = dummyDomainOwner()
+        owner = dummyDataOwner()
     )
 
-    private fun dummyDomainOwner() = DataOwner(
+    private fun dummyDataOwner() = DataOwner(
         name = randomString(),
         urlPhoto = randomString()
     )

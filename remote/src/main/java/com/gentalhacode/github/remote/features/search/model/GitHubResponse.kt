@@ -1,5 +1,6 @@
 package com.gentalhacode.github.remote.features.search.model
 
+import com.gentalhacode.github.model.Repository
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -7,5 +8,5 @@ import com.google.gson.annotations.SerializedName
  */
 data class GitHubResponse(
     @SerializedName("items")
-    val repositories: List<RemoteRepository>
+    val repositories: List<Repository>
 )

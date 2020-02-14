@@ -1,6 +1,7 @@
 package com.gentalhacode.github.remote.features.search.service
 
 import com.gentalhacode.github.remote.features.search.model.GitHubResponse
+import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,5 +16,5 @@ interface GitHubService {
         @Query("q") query: String,
         @Query("sort") sort: String = "stars",
         @Query("order") order: String = "desc"
-    ): Single<GitHubResponse>
+    ): Flowable<GitHubResponse>
 }
