@@ -1,0 +1,26 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation project(":base")
+    implementation project(":model")
+    implementation project(":data")
+
+    implementation Dependencies.kotlinStdLib
+
+    implementation Dependencies.rxJava
+    implementation Dependencies.rxKotlin
+
+    implementation Dependencies.koin
+
+    implementation Dependencies.retrofit
+    implementation Dependencies.gson
+    implementation Dependencies.gsonConverter
+    implementation Dependencies.rxJavaRetrofit
+
+    testImplementation TestDependencies.mockitoKotlin
+    testImplementation TestDependencies.jUnit
+    testImplementation TestDependencies.assertJ
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
