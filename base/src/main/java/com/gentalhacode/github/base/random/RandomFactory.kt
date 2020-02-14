@@ -9,3 +9,4 @@ fun randomString() = UUID.randomUUID().toString()
 fun randomInt() = Math.random().toInt()
 fun randomDouble() = Math.random()
 fun randomLong() = Math.random().toLong()
+fun randomBoolean() = Math.random().toLong() > 100

@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 /**
  * .:.:.:. Created by @thgMatajs on 12/02/20 .:.:.:.
  */
-class SearchRemoteDataStore(
+open class SearchRemoteDataStore(
     private val remote: SearchRemote
 ) : SearchDataStore.Remote {
 

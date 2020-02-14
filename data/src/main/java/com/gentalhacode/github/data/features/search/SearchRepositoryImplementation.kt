@@ -8,7 +8,7 @@ import io.reactivex.Flowable
 /**
  * .:.:.:. Created by @thgMatajs on 12/02/20 .:.:.:.
  */
-class SearchRepositoryImplementation(
+open class SearchRepositoryImplementation(
     private val factory: SearchDataFactory
 ) : SearchRepository {
 

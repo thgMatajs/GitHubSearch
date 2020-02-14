@@ -10,7 +10,7 @@ import io.reactivex.Single
 /**
  * .:.:.:. Created by @thgMatajs on 12/02/20 .:.:.:.
  */
-class SearchCacheDataStore(
+open class SearchCacheDataStore(
     private val cache: SearchCache
 ) : SearchDataStore.Cache {
 
