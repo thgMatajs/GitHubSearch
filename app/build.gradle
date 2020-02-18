@@ -66,6 +66,9 @@ dependencies {
     implementation Dependencies.materialDesign
     implementation Dependencies.cardView
     implementation Dependencies.constraintLayout
+    implementation Dependencies.pagging
+    implementation Dependencies.rxJavaPaging
+    implementation Dependencies.coil
 
     implementation Dependencies.koin
     implementation Dependencies.koinAndorid

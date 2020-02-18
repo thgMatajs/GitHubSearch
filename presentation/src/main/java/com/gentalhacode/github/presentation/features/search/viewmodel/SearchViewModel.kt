@@ -31,10 +31,10 @@ class SearchViewModel(
     private lateinit var sourceFactory: SearchRepositoriesSourceFactory
     private var dispose: CompositeDisposable = CompositeDisposable()
 
-    private val getRepositoriesLiveData: MutableLiveData<Result<List<Repository>>> =
+    private val getRepositoriesLiveData: MutableLiveData<Result<PagedList<Repository>>> =
         MutableLiveData()
 
-    fun observeGetRepositoriesLiveData(): LiveData<Result<List<Repository>>> =
+    fun observeGetRepositoriesLiveData(): LiveData<Result<PagedList<Repository>>> =
         getRepositoriesLiveData
 
     fun searchRepositoriesBy(language: String) {
