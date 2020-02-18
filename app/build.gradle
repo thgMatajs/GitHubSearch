@@ -30,8 +30,7 @@ android {
             debuggable true
             minifyEnabled false
 //            signingConfig signingConfigs.debug
-//            buildConfigField "String", "BASE_URL", BASE_DEBUG_API
-//            buildConfigField "String", "GOOGLE_API_KEY", GOOGLE_API_KEY
+            buildConfigField "String", "BASE_URL", BASE_URL
         }
 
         release {
@@ -40,8 +39,7 @@ android {
             minifyEnabled true
 //            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            buildConfigField "String", "BASE_URL", BASE_PROD_API
-//            buildConfigField "String", "GOOGLE_API_KEY", GOOGLE_API_KEY
+            buildConfigField "String", "BASE_URL", BASE_URL
         }
     }
 
@@ -59,7 +57,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation project(":di")
+    implementation project(":presentation")
+    implementation project(":base")
+    implementation project(":model")
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.appCompat
     implementation Dependencies.materialDesign

@@ -6,6 +6,7 @@ dependencies {
 
     implementation project(":domain")
     implementation project(":model")
+    implementation project(":base")
 
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.appCompat
@@ -13,7 +14,7 @@ dependencies {
     implementation Dependencies.rxJava
     implementation Dependencies.rxKotlin
     implementation Dependencies.rxAndroid
-    
+
     implementation Dependencies.koin
     implementation Dependencies.koinViewModel
 

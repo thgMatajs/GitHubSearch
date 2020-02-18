@@ -20,7 +20,7 @@ class SearchViewModel(
     private val getRepositoriesLiveData: MutableLiveData<Result<List<Repository>>> =
         MutableLiveData()
 
-    private fun observeGetRepositoriesLiveData(): LiveData<Result<List<Repository>>> =
+    fun observeGetRepositoriesLiveData(): LiveData<Result<List<Repository>>> =
         getRepositoriesLiveData
 
     fun searchRepositoriesBy(language: String) {

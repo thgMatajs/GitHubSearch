@@ -7,4 +7,5 @@ import com.gentalhacode.github.model.Owner
  */
 data class DomainOwner(
     override val name: String,
-    override val urlPhoto: String) : Owner
+    override val urlPhoto: String
+) : Owner
