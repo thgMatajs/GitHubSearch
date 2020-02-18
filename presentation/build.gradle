@@ -11,6 +11,8 @@ dependencies {
     implementation Dependencies.kotlinStdLib
     implementation Dependencies.appCompat
     implementation Dependencies.androidxCore
+    implementation Dependencies.pagging
+    implementation Dependencies.rxJavaPaging
     implementation Dependencies.rxJava
     implementation Dependencies.rxKotlin
     implementation Dependencies.rxAndroid
