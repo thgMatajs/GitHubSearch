@@ -25,7 +25,7 @@ android {
         debug {
             manifestPlaceholders = [applicationLabel: " - Staging"]
             versionNameSuffix "-debug"
-            buildConfigField "String", "BASE_URL", BASE_DEBUG_API
+            buildConfigField "String", "BASE_URL", BASE_URL
             debuggable true
             minifyEnabled false
         }
@@ -34,7 +34,7 @@ android {
             manifestPlaceholders = [applicationLabel: ""]
             debuggable false
             minifyEnabled true
-            buildConfigField "String", "BASE_URL", BASE_PROD_API
+            buildConfigField "String", "BASE_URL", BASE_URL
         }
     }
 

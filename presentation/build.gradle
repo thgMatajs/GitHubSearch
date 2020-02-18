@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+apply from:"../build-system/android-module.gradle"
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":domain")
+    implementation project(":model")
+
+    implementation Dependencies.kotlinStdLib
+    implementation Dependencies.appCompat
+    implementation Dependencies.androidxCore
+    implementation Dependencies.rxJava
+    implementation Dependencies.rxKotlin
+    implementation Dependencies.rxAndroid
+    
+    implementation Dependencies.koin
+    implementation Dependencies.koinViewModel
+
+    testImplementation TestDependencies.mockitoKotlin
+    testImplementation TestDependencies.jUnit
+    testImplementation TestDependencies.assertJ
+}
