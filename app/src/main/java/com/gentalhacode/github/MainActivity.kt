@@ -2,6 +2,7 @@ package com.gentalhacode.github
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.gentalhacode.github.features.search.adapter.RepositoryAdapter
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         repositoryRv.adapter = adapter
+//        repositoryRv.scrollToPosition(savedInstanceState?.getInt("rv_position") ?: 0)
+//        repositoryRv.scrollY = savedInstanceState?.getInt("rv_position") ?: 0
         searchViewModel.searchRepositoriesBy(ViewParamsToSearch(
             language = "language:kotlin"
         ))
@@ -39,5 +42,10 @@ class MainActivity : AppCompatActivity() {
                     println("THG_LOG_ERROR -->$error, ${error?.message}")
                 })
         })
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState.putInt("rv_position", repositoryRv.scrollY)
     }
 }

@@ -17,7 +17,7 @@ class GetRepositoriesUseCase(
 
     override fun buildUseCaseFlowable(params: ParamsToSearch?): Flowable<List<Repository>> {
         return params?.let { paramsToSearch ->
-            repository.getRepositoriesBy(paramsToSearch).takeIf { paramsToSearch.language.isBlank() }
+            repository.getRepositoriesBy(paramsToSearch).takeIf { paramsToSearch.language.isNotBlank() }
                 ?: Flowable.error(IllegalArgumentException("Parameter can not be blank"))
         } ?: Flowable.error(IllegalArgumentException("Parameter can not be null"))
     }

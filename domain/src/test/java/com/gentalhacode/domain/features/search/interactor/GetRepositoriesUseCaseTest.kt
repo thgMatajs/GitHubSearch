@@ -49,6 +49,8 @@ class GetRepositoriesUseCaseTest {
     @Test
     fun `Check exception when pass blank param`() {
         val params = DomainParamsToSearch("")
+        whenever(repository.getRepositoriesBy(params))
+            .thenReturn(Flowable.just(dummyRepositories))
         val call = useCase.buildUseCaseFlowable(params).test()
         call.assertFailure(IllegalArgumentException::class.java)
     }

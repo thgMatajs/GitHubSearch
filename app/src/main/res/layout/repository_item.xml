@@ -47,8 +47,8 @@
 
         <ImageView
             android:id="@+id/repositoryItemIvFork"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginTop="8dp"
             android:padding="4dp"
             android:scaleType="centerCrop"
@@ -69,8 +69,8 @@
 
         <ImageView
             android:id="@+id/repositoryItemIvStar"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_star"
             app:layout_constraintStart_toEndOf="@+id/repositoryItemForks"
