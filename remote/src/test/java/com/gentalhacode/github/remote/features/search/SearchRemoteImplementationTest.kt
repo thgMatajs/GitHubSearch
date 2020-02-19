@@ -21,11 +21,18 @@ class SearchRemoteImplementationTest {
 
     private val dummyResponse = RemoteFactory.dummyGitHubResponse()
     private val dummyRepositories = dummyResponse.repositories
-    private val params = "kotlin"
+    private val params = RemoteFactory.dummyParamsToSearch()
 
     @Before
     fun init() {
-        whenever(service.getRepositoriesBy(params))
+        whenever(
+            service.getRepositoriesBy(
+                query = params.language,
+                order = params.order,
+                sort = params.sort,
+                page = params.page
+            )
+        )
             .thenReturn(Flowable.just(dummyResponse))
     }
 

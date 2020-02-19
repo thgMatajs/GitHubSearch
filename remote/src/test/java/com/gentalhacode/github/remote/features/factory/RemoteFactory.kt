@@ -7,6 +7,9 @@ import com.gentalhacode.github.data.features.search.model.DataOwner
 import com.gentalhacode.github.data.features.search.model.DataRepository
 import com.gentalhacode.github.model.Repository
 import com.gentalhacode.github.remote.features.search.model.GitHubResponse
+import com.gentalhacode.github.remote.features.search.model.RemoteOwner
+import com.gentalhacode.github.remote.features.search.model.RemoteParamsToSearch
+import com.gentalhacode.github.remote.features.search.model.RemoteRepository
 import com.gentalhacode.github.remote.features.search.service.GitHubService
 
 /**
@@ -18,7 +21,7 @@ object RemoteFactory {
         dummyRemoteRepositories()
     )
 
-    private fun dummyRemoteRepositories(): List<Repository> = listOf(
+    private fun dummyRemoteRepositories(): List<RemoteRepository> = listOf(
         dummyRemoteRepository(),
         dummyRemoteRepository(),
         dummyRemoteRepository(),
@@ -27,7 +30,7 @@ object RemoteFactory {
         dummyRemoteRepository()
     )
 
-    private fun dummyRemoteRepository() = DataRepository(
+    private fun dummyRemoteRepository() = RemoteRepository(
         name = randomString(),
         totalForks = randomInt(),
         totalStars = randomInt(),
@@ -35,8 +38,15 @@ object RemoteFactory {
         owner = dummyRemoteOwner()
     )
 
-    private fun dummyRemoteOwner() = DataOwner(
+    private fun dummyRemoteOwner() = RemoteOwner(
         name = randomString(),
         urlPhoto = randomString()
+    )
+
+    fun dummyParamsToSearch() = RemoteParamsToSearch(
+        randomString(),
+        randomString(),
+        randomString(),
+        randomInt()
     )
 }

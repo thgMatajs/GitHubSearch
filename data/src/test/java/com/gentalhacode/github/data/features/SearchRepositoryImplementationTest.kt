@@ -21,11 +21,11 @@ class SearchRepositoryImplementationTest {
 
     private val remoteDataStore: SearchRemoteDataStore = mock()
     private val cacheDataStore: SearchCacheDataStore = mock()
-    private val dataFactory = SearchDataFactory(remoteDataStore, cacheDataStore)
+    private val dataFactory = SearchDataFactory(remoteDataStore)
     private val repositoryImpl = SearchRepositoryImplementation(dataFactory)
     private val isCached = randomBoolean()
     private val dummyDataRepositories = DataFactory.dummyDataRepositories()
-    private val language = "kotlin"
+    private val params = DataFactory.dummyDataParamsToSearch()
 
     @Before
     fun init() {
@@ -33,9 +33,9 @@ class SearchRepositoryImplementationTest {
             .thenReturn(Single.just(isCached))
         whenever(cacheDataStore.save(dummyDataRepositories))
             .thenReturn(Completable.complete())
-        whenever(cacheDataStore.getRepositoriesBy(language))
+        whenever(cacheDataStore.getRepositoriesBy(params))
             .thenReturn(Flowable.just(dummyDataRepositories))
-        whenever(remoteDataStore.getRepositoriesBy(language))
+        whenever(remoteDataStore.getRepositoriesBy(params))
             .thenReturn(Flowable.just(dummyDataRepositories))
     }
 
@@ -56,7 +56,7 @@ class SearchRepositoryImplementationTest {
 
     @Test
     fun `Check that the cache list is loading`() {
-        val test = cacheDataStore.getRepositoriesBy(language).test()
+        val test = cacheDataStore.getRepositoriesBy(params).test()
         test.assertNoErrors()
             .assertComplete()
             .assertValue {
@@ -66,7 +66,7 @@ class SearchRepositoryImplementationTest {
 
     @Test
     fun `Check that the remote list is loading`() {
-        val test = remoteDataStore.getRepositoriesBy(language).test()
+        val test = remoteDataStore.getRepositoriesBy(params).test()
         test.assertNoErrors()
             .assertComplete()
             .assertValue {
@@ -78,7 +78,7 @@ class SearchRepositoryImplementationTest {
     fun `Check if list is loading data cache`() {
         whenever(cacheDataStore.isCached())
             .thenReturn(Single.just(true))
-        val test = repositoryImpl.getRepositoriesBy(language).test()
+        val test = repositoryImpl.getRepositoriesBy(params).test()
         test.assertNoErrors()
             .assertComplete()
             .assertValue {
@@ -90,7 +90,7 @@ class SearchRepositoryImplementationTest {
     fun `Check if list is loading data remote`() {
         whenever(cacheDataStore.isCached())
             .thenReturn(Single.just(false))
-        val test = repositoryImpl.getRepositoriesBy(language).test()
+        val test = repositoryImpl.getRepositoriesBy(params).test()
         test.assertNoErrors()
             .assertComplete()
             .assertValue {

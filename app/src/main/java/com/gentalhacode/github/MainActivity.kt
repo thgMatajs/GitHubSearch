@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        println("THG_LOG ON_CREATE")
         repositoryRv.adapter = adapter
         searchViewModel.searchRepositoriesBy(ViewParamsToSearch(
             language = "language:kotlin"

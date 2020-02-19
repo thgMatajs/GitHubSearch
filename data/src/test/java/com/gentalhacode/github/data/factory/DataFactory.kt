@@ -4,6 +4,7 @@ import com.gentalhacode.github.base.random.randomInt
 import com.gentalhacode.github.base.random.randomLong
 import com.gentalhacode.github.base.random.randomString
 import com.gentalhacode.github.data.features.search.model.DataOwner
+import com.gentalhacode.github.data.features.search.model.DataParamsToSearch
 import com.gentalhacode.github.data.features.search.model.DataRepository
 import com.gentalhacode.github.model.Repository
 
@@ -32,5 +33,11 @@ object DataFactory {
     private fun dummyDataOwner() = DataOwner(
         name = randomString(),
         urlPhoto = randomString()
+    )
+    fun dummyDataParamsToSearch() = DataParamsToSearch(
+        randomString(),
+        randomString(),
+        randomString(),
+        randomInt()
     )
 }
