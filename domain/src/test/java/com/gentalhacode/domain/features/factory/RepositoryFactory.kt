@@ -5,6 +5,7 @@ import com.gentalhacode.github.base.random.randomLong
 import com.gentalhacode.github.base.random.randomString
 import com.gentalhacode.github.domain.features.search.model.DomainRepository
 import com.gentalhacode.github.domain.features.search.model.DomainOwner
+import com.gentalhacode.github.domain.features.search.model.DomainParamsToSearch
 import com.gentalhacode.github.model.Repository
 
 /**
@@ -32,5 +33,12 @@ object RepositoryFactory {
     private fun dummyDomainOwner() = DomainOwner(
         name = randomString(),
         urlPhoto = randomString()
+    )
+
+    fun dummyDomainParamsToSearch() = DomainParamsToSearch(
+        randomString(),
+        randomString(),
+        randomString(),
+        randomInt()
     )
 }

@@ -2,6 +2,7 @@ package com.gentalhacode.github.data.features.search.datastore
 
 import com.gentalhacode.github.data.features.search.repository.SearchCache
 import com.gentalhacode.github.data.features.search.repository.SearchDataStore
+import com.gentalhacode.github.model.ParamsToSearch
 import com.gentalhacode.github.model.Repository
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -18,8 +19,8 @@ open class SearchCacheDataStore(
         return cache.save(repositories)
     }
 
-    override fun getRepositoriesBy(language: String): Flowable<List<Repository>> {
-        return cache.getRepositoriesBy(language)
+    override fun getRepositoriesBy(params: ParamsToSearch): Flowable<List<Repository>> {
+        return cache.getRepositoriesBy(params)
     }
 
     override fun isCached(): Single<Boolean> {

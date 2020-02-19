@@ -14,7 +14,8 @@ interface GitHubService {
     @GET("search/repositories")
     fun getRepositoriesBy(
         @Query("q") query: String,
-        @Query("sort") sort: String = "stars",
-        @Query("order") order: String = "desc"
+        @Query("sort") sort: String,
+        @Query("order") order: String,
+        @Query("page") page: Int
     ): Flowable<GitHubResponse>
 }

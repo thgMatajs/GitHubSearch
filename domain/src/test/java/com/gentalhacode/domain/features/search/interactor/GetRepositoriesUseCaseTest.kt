@@ -3,6 +3,7 @@ package com.gentalhacode.domain.features.search.interactor
 import com.gentalhacode.domain.features.factory.RepositoryFactory
 import com.gentalhacode.github.base.rx.PostExecutionThread
 import com.gentalhacode.github.domain.features.search.interactor.GetRepositoriesUseCase
+import com.gentalhacode.github.domain.features.search.model.DomainParamsToSearch
 import com.gentalhacode.github.domain.features.search.repository.SearchRepository
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -19,7 +20,7 @@ class GetRepositoriesUseCaseTest {
     private val repository = mock<SearchRepository>()
     private var postExecutionThread = mock<PostExecutionThread>()
     private val dummyRepositories = RepositoryFactory.dummyDomainRepositories()
-    private val paramsToSearch = "kotlin"
+    private val paramsToSearch = RepositoryFactory.dummyDomainParamsToSearch()
 
     @Before
     fun init() {
@@ -47,7 +48,8 @@ class GetRepositoriesUseCaseTest {
 
     @Test
     fun `Check exception when pass blank param`() {
-        val call = useCase.buildUseCaseFlowable("").test()
+        val params = DomainParamsToSearch("")
+        val call = useCase.buildUseCaseFlowable(params).test()
         call.assertFailure(IllegalArgumentException::class.java)
     }
 }

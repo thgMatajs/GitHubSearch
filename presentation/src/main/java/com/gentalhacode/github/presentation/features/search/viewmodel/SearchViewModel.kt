@@ -7,14 +7,18 @@ import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
 import com.gentalhacode.github.base.state.Result
 import com.gentalhacode.github.domain.features.search.interactor.GetRepositoriesUseCase
+import com.gentalhacode.github.model.ParamsToSearch
 import com.gentalhacode.github.model.Repository
 import com.gentalhacode.github.presentation.extensions.setFailure
 import com.gentalhacode.github.presentation.extensions.setLoading
 import com.gentalhacode.github.presentation.extensions.setSuccess
 import com.gentalhacode.github.presentation.features.search.pagging.SearchRepositoriesSourceFactory
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 /**
  * .:.:.:. Created by @thgMatajs on 17/02/20 .:.:.:.
@@ -23,9 +27,9 @@ class SearchViewModel(
     private val useCase: GetRepositoriesUseCase
 ) : ViewModel() {
 
-    lateinit var observable: Observable<PagedList<Repository>>
+    private lateinit var flowable: Flowable<PagedList<Repository>>
     private val pagedListConfig: PagedList.Config = PagedList.Config.Builder()
-        .setPrefetchDistance(6)
+        .setPrefetchDistance(20)
         .setEnablePlaceholders(false)
         .build()
     private lateinit var sourceFactory: SearchRepositoriesSourceFactory
@@ -37,14 +41,17 @@ class SearchViewModel(
     fun observeGetRepositoriesLiveData(): LiveData<Result<PagedList<Repository>>> =
         getRepositoriesLiveData
 
-    fun searchRepositoriesBy(language: String) {
+    fun searchRepositoriesBy(params: ParamsToSearch) {
         getRepositoriesLiveData.setLoading()
-        sourceFactory = SearchRepositoriesSourceFactory(language, useCase)
-        observable = RxPagedListBuilder(sourceFactory, pagedListConfig)
+        sourceFactory = SearchRepositoriesSourceFactory(params, useCase)
+        flowable = RxPagedListBuilder(sourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.io())
-            .buildObservable()
+            .buildFlowable(BackpressureStrategy.BUFFER)
+            .cache()
         dispose.add(
-            observable.subscribe(
+            flowable
+                .delay(10000, TimeUnit.MILLISECONDS)
+                .subscribe(
                 { repositories ->
                     getRepositoriesLiveData.setSuccess(repositories)
                 },
@@ -57,6 +64,7 @@ class SearchViewModel(
     override fun onCleared() {
         super.onCleared()
         if (this::sourceFactory.isInitialized) sourceFactory.dispose()
-        if (this::observable.isInitialized) dispose.dispose()
+        if (this::flowable.isInitialized) dispose.dispose()
+        useCase.dispose()
     }
 }

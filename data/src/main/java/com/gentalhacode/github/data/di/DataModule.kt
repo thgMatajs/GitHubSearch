@@ -13,6 +13,6 @@ import org.koin.dsl.module
 val dataModule = module {
     factory { SearchCacheDataStore(get()) }
     factory { SearchRemoteDataStore(get()) }
-    factory { SearchDataFactory(get(), get()) }
+    factory { SearchDataFactory(get()) }
     factory<SearchRepository> { SearchRepositoryImplementation(get()) }
 }

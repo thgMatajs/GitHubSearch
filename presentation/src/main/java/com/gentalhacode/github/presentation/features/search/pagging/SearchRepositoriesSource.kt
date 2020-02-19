@@ -2,6 +2,7 @@ package com.gentalhacode.github.presentation.features.search.pagging
 
 import androidx.paging.PageKeyedDataSource
 import com.gentalhacode.github.domain.features.search.interactor.GetRepositoriesUseCase
+import com.gentalhacode.github.model.ParamsToSearch
 import com.gentalhacode.github.model.Repository
 import io.reactivex.Observable
 
@@ -9,7 +10,7 @@ import io.reactivex.Observable
  * .:.:.:. Created by @thgMatajs on 17/02/20 .:.:.:.
  */
 class SearchRepositoriesSource(
-    private val language: String,
+    private val params: ParamsToSearch,
     private val useCase: GetRepositoriesUseCase
 ) : PageKeyedDataSource<Int, Repository>() {
 
@@ -35,13 +36,16 @@ class SearchRepositoriesSource(
         initialCallback: LoadInitialCallback<Int, Repository>?,
         callback: LoadCallback<Int, Repository>?
     ) {
-        useCase.execute("language:$language",
+        params.page = requestedPage
+        useCase.execute(params,
             onNext = { repositories ->
                 initialCallback?.onResult(repositories, null, adjacentPage)
                 callback?.onResult(repositories, adjacentPage)
+                println("THG_LOG --> SOURCE ON_NEXT ${repositories.size}")
             },
             onError = { error ->
                 Observable.error<Exception>(error)
+                println("THG_LOG --> SOURCE ON_ERROR")
             })
     }
 }

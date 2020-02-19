@@ -38,7 +38,6 @@ class RepositoryAdapter : PagedListAdapter<Repository, RepositoryAdapter.ViewHol
                 findViewById<TextView>(R.id.repositoryItemForks).text = item?.totalForks.toString()
                 findViewById<ImageView>(R.id.repositoryItemIv).load(item?.owner?.urlPhoto) {
                     crossfade(true)
-                    transformations(CircleCropTransformation())
                 }
             }
         }

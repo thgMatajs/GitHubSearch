@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.gentalhacode.github.features.search.adapter.RepositoryAdapter
+import com.gentalhacode.github.features.search.model.ViewParamsToSearch
 import com.gentalhacode.github.features.search.model.toView
 import com.gentalhacode.github.presentation.features.search.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,11 +19,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        println("THG_LOG ON_CREATE")
         repositoryRv.adapter = adapter
-        searchViewModel.searchRepositoriesBy("kotlin")
+        searchViewModel.searchRepositoriesBy(ViewParamsToSearch(
+            language = "language:kotlin"
+        ))
         searchViewModel.observeGetRepositoriesLiveData().observe(this, Observer { result ->
             result.handle(
-                onLoading = { progressBar.visibility = View.VISIBLE },
+                onLoading = {
+                    println("THG_LOG_LOADING <--")
+                    progressBar.visibility = View.VISIBLE
+                },
                 onSuccess = { respositories ->
                     adapter.submitList(respositories)
                     progressBar.visibility = View.GONE
