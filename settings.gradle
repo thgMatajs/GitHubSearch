@@ -1,2 +1,2 @@
-include ':app', ':base', ':domain', ':model', ':data', ':remote', ':presentation', ':di'
+include ':app', ':base', ':domain', ':model', ':data', ':remote', ':presentation', ':di', ':cache'
 rootProject.name='GitHub'

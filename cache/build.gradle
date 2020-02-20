@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+apply from:"../build-system/android-module.gradle"
+
+dependencies {
+
+    implementation project(":base")
+    implementation project(":model")
+    implementation project(":data")
+
+    implementation Dependencies.kotlinStdLib
+    implementation Dependencies.appCompat
+    implementation Dependencies.androidxCore
+    implementation Dependencies.rxJava
+    implementation Dependencies.rxKotlin
+    implementation Dependencies.rxAndroid
+
+    implementation Dependencies.koin
+
+    testImplementation TestDependencies.mockitoKotlin
+    testImplementation TestDependencies.jUnit
+    testImplementation TestDependencies.assertJ
+}

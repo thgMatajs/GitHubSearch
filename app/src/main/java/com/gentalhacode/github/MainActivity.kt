@@ -21,31 +21,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         repositoryRv.adapter = adapter
-//        repositoryRv.scrollToPosition(savedInstanceState?.getInt("rv_position") ?: 0)
-//        repositoryRv.scrollY = savedInstanceState?.getInt("rv_position") ?: 0
-        searchViewModel.searchRepositoriesBy(ViewParamsToSearch(
-            language = "language:kotlin"
-        ))
+            searchViewModel.searchRepositoriesBy(ViewParamsToSearch(
+                language = "language:kotlin"
+            ))
+        oberveSearchRepositoriesLiveData()
+    }
+
+    private fun oberveSearchRepositoriesLiveData() {
         searchViewModel.observeGetRepositoriesLiveData().observe(this, Observer { result ->
             result.handle(
                 onLoading = {
                     println("THG_LOG_LOADING <--")
                     progressBar.visibility = View.VISIBLE
                 },
-                onSuccess = { respositories ->
-                    adapter.submitList(respositories)
+                onSuccess = { repositories ->
+                    adapter.submitList(repositories)
                     progressBar.visibility = View.GONE
                     repositoryRv.visibility = View.VISIBLE
-                    println("THG_LOG_SUCCESS -->${respositories?.map { it.toView() }}")
+                    println("THG_LOG_SUCCESS -->${repositories?.map { it.toView() }}")
                 },
                 onError = { error ->
                     println("THG_LOG_ERROR -->$error, ${error?.message}")
                 })
         })
-    }
-
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        outState.putInt("rv_position", repositoryRv.scrollY)
     }
 }
