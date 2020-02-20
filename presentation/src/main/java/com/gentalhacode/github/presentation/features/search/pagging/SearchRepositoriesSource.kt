@@ -5,13 +5,12 @@ import com.gentalhacode.github.domain.features.search.interactor.GetRepositories
 import com.gentalhacode.github.model.ParamsToSearch
 import com.gentalhacode.github.model.Repository
 import io.reactivex.Flowable
-import io.reactivex.Observable
 
 /**
  * .:.:.:. Created by @thgMatajs on 17/02/20 .:.:.:.
  */
 class SearchRepositoriesSource(
-    private val params: ParamsToSearch,
+    private val paramsToSeach: ParamsToSearch,
     private val useCase: GetRepositoriesUseCase
 ) : PageKeyedDataSource<Int, Repository>() {
 
@@ -36,8 +35,8 @@ class SearchRepositoriesSource(
         initialCallback: LoadInitialCallback<Int, Repository>?,
         callback: LoadCallback<Int, Repository>?
     ) {
-        params.page = requestedPage
-        useCase.execute(params,
+        paramsToSeach.page = requestedPage
+        useCase.execute(paramsToSeach,
             onNext = { repositories ->
                 initialCallback?.onResult(repositories, null, adjacentPage)
                 callback?.onResult(repositories, adjacentPage)

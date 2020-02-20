@@ -21,7 +21,9 @@ class SearchCacheImplementation(
     }
 
     override fun getRepositoriesBy(params: ParamsToSearch): Flowable<List<Repository>> {
-        return gitHubDatabase.repositoryDao().getRepositoriesBy()
+        return gitHubDatabase.repositoryDao().getRepositoriesBy().map {
+            it.map { repo -> repo as Repository }
+        }
     }
 
     override fun isCached(): Single<Boolean> {

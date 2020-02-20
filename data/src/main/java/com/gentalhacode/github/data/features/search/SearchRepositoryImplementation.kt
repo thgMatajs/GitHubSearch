@@ -12,30 +12,38 @@ import io.reactivex.Flowable
 open class SearchRepositoryImplementation(
     private val factory: SearchDataFactory
 ) : SearchRepository {
-    override fun getRepositoriesBy(params: ParamsToSearch): Flowable<List<Repository>> {
-        return factory.getRemote()
-            .getRepositoriesBy(params)
-    }
 
-    //    override fun getRepositoriesBy(language: String): Flowable<List<Repository>> {
-//        return factory.getCache().isCached().flatMapPublisher { isCached ->
-//            if (isCached) {
-//                factory.getCache()
-//                    .getRepositoriesBy(language)
+    override fun getRepositoriesBy(params: ParamsToSearch): Flowable<List<Repository>> {
+//        return factory.getCache().getRepositoriesBy(params).doOnNext {
+//            if (it.isEmpty()) {
+//                factory.getRemote().getRepositoriesBy(params).subscribe({ remoteRepositories ->
+//                    factory.getCache().save(remoteRepositories).subscribe()
+//                    Flowable.just(remoteRepositories)
+//                }, { error ->
+//                    Flowable.error<Throwable>(error)
+//                })
 //            } else {
-//                factory.getRemote()
-//                    .getRepositoriesBy(language)
-//                    .doOnNext {
-//                        factory.getCache().save(it)
-//                            .subscribe(
-//                                {},
-//                                { error ->
-//                                    Flowable.error<Exception>(error)
-//                                })
-//                    }
+//                factory.getCache().getRepositoriesBy(params)
 //            }
-//        }.doOnError { error ->
-//            Flowable.error<Exception>(error)
 //        }
-//    }
+        return factory.getCache().isCached().flatMapPublisher { isCached ->
+            if (isCached) {
+                factory.getCache()
+                    .getRepositoriesBy(params)
+            } else {
+                factory.getRemote()
+                    .getRepositoriesBy(params)
+                    .doOnNext {
+                        factory.getCache().save(it)
+                            .subscribe(
+                                {  },
+                                { error ->
+                                    Flowable.error<Exception>(error)
+                                })
+                    }
+            }
+        }.doOnError { error ->
+            Flowable.error<Throwable>(error)
+        }
+    }
 }

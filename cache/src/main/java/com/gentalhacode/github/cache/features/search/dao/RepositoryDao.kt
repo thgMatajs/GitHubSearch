@@ -20,5 +20,5 @@ interface RepositoryDao {
 
 
     @Query("SELECT * FROM repositories ORDER BY totalStars DESC")
-    fun getRepositoriesBy(): Flowable<List<Repository>>
+    fun getRepositoriesBy(): Flowable<List<CacheRepository>>
 }
