@@ -1,13 +1,12 @@
 package com.gentalhacode.github
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.gentalhacode.github.features.search.adapter.RepositoryAdapter
 import com.gentalhacode.github.features.search.model.ViewParamsToSearch
-import com.gentalhacode.github.features.search.model.toView
 import com.gentalhacode.github.presentation.features.search.viewmodel.SearchViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,27 +20,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         repositoryRv.adapter = adapter
-            searchViewModel.searchRepositoriesBy(ViewParamsToSearch(
+        searchViewModel.searchRepositoriesBy(
+            ViewParamsToSearch(
                 language = "language:kotlin"
-            ))
-        oberveSearchRepositoriesLiveData()
+            )
+        )
+        observeSearchRepositoriesLiveData()
     }
 
-    private fun oberveSearchRepositoriesLiveData() {
+    private fun observeSearchRepositoriesLiveData() {
         searchViewModel.observeGetRepositoriesLiveData().observe(this, Observer { result ->
             result.handle(
                 onLoading = {
-                    println("THG_LOG_LOADING <--")
                     progressBar.visibility = View.VISIBLE
                 },
                 onSuccess = { repositories ->
                     adapter.submitList(repositories)
                     progressBar.visibility = View.GONE
                     repositoryRv.visibility = View.VISIBLE
-                    println("THG_LOG_SUCCESS -->${repositories?.map { it.toView() }}")
                 },
                 onError = { error ->
-                    println("THG_LOG_ERROR -->$error, ${error?.message}")
+                    Toast.makeText(this, error?.message, Toast.LENGTH_SHORT).show()
                 })
         })
     }
