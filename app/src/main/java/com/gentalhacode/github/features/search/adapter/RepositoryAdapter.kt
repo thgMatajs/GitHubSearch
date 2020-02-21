@@ -1,6 +1,5 @@
 package com.gentalhacode.github.features.search.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,10 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import coil.transform.CircleCropTransformation
+import coil.request.CachePolicy
+import coil.size.Precision
 import com.gentalhacode.github.R
-import com.gentalhacode.github.features.search.model.ViewRepository
+import com.gentalhacode.github.features.search.model.toView
 import com.gentalhacode.github.model.Repository
 
 /**
@@ -38,6 +38,10 @@ class RepositoryAdapter : PagedListAdapter<Repository, RepositoryAdapter.ViewHol
                 findViewById<TextView>(R.id.repositoryItemForks).text = item?.totalForks.toString()
                 findViewById<ImageView>(R.id.repositoryItemIv).load(item?.owner?.urlPhoto) {
                     crossfade(true)
+                    size(130, 130)
+                    precision(Precision.AUTOMATIC)
+                    diskCachePolicy(CachePolicy.ENABLED)
+                    memoryCachePolicy(CachePolicy.ENABLED)
                 }
             }
         }
@@ -49,15 +53,14 @@ class RepositoryAdapter : PagedListAdapter<Repository, RepositoryAdapter.ViewHol
                 oldItem: Repository,
                 newItem: Repository
             ): Boolean {
-                return oldItem.id == newItem.id
+                return oldItem.toView().id == newItem.toView().id
             }
 
-            @SuppressLint("DiffUtilEquals")
             override fun areContentsTheSame(
                 oldItem: Repository,
                 newItem: Repository
             ): Boolean {
-                return oldItem == newItem
+                return oldItem.toView() == newItem.toView()
             }
         }
     }

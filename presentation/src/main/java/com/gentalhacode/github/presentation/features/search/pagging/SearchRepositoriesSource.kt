@@ -10,7 +10,7 @@ import io.reactivex.Flowable
  * .:.:.:. Created by @thgMatajs on 17/02/20 .:.:.:.
  */
 class SearchRepositoriesSource(
-    private val paramsToSeach: ParamsToSearch,
+    private val paramsToSearch: ParamsToSearch,
     private val useCase: GetRepositoriesUseCase
 ) : PageKeyedDataSource<Int, Repository>() {
 
@@ -35,8 +35,8 @@ class SearchRepositoriesSource(
         initialCallback: LoadInitialCallback<Int, Repository>?,
         callback: LoadCallback<Int, Repository>?
     ) {
-        paramsToSeach.page = requestedPage
-        useCase.execute(paramsToSeach,
+        paramsToSearch.page = requestedPage
+        useCase.execute(paramsToSearch,
             onNext = { repositories ->
                 initialCallback?.onResult(repositories, null, adjacentPage)
                 callback?.onResult(repositories, adjacentPage)
