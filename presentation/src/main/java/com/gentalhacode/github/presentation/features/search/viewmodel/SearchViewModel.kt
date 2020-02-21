@@ -2,7 +2,6 @@ package com.gentalhacode.github.presentation.features.search.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
@@ -16,8 +15,6 @@ import com.gentalhacode.github.presentation.extensions.setSuccess
 import com.gentalhacode.github.presentation.features.search.pagging.SearchRepositoriesSourceFactory
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -47,7 +44,6 @@ class SearchViewModel(
     fun searchRepositoriesBy(params: ParamsToSearch) {
         getRepositoriesLiveData.setLoading()
         sourceFactory = SearchRepositoriesSourceFactory(params, useCase)
-        //todo(Alterar para LiveData)
         flowable = RxPagedListBuilder(sourceFactory, pagedListConfig)
             .setFetchScheduler(Schedulers.trampoline())
             .buildFlowable(BackpressureStrategy.BUFFER)

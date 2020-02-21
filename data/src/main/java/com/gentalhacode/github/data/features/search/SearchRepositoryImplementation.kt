@@ -14,18 +14,6 @@ open class SearchRepositoryImplementation(
 ) : SearchRepository {
 
     override fun getRepositoriesBy(params: ParamsToSearch): Flowable<List<Repository>> {
-//        return factory.getCache().getRepositoriesBy(params).doOnNext {
-//            if (it.isEmpty()) {
-//                factory.getRemote().getRepositoriesBy(params).subscribe({ remoteRepositories ->
-//                    factory.getCache().save(remoteRepositories).subscribe()
-//                    Flowable.just(remoteRepositories)
-//                }, { error ->
-//                    Flowable.error<Throwable>(error)
-//                })
-//            } else {
-//                factory.getCache().getRepositoriesBy(params)
-//            }
-//        }
         return factory.getCache().isCached().flatMapPublisher { isCached ->
             if (isCached) {
                 factory.getCache()
@@ -36,7 +24,7 @@ open class SearchRepositoryImplementation(
                     .doOnNext {
                         factory.getCache().save(it)
                             .subscribe(
-                                {  },
+                                {},
                                 { error ->
                                     Flowable.error<Exception>(error)
                                 })
