@@ -40,11 +40,9 @@ class SearchRepositoriesSource(
             onNext = { repositories ->
                 initialCallback?.onResult(repositories, null, adjacentPage)
                 callback?.onResult(repositories, adjacentPage)
-                println("THG_LOG --> SOURCE ON_NEXT ${repositories.size}")
             },
             onError = { error ->
                 Flowable.error<Throwable>(error)
-                println("THG_LOG --> SOURCE ON_ERROR $error")
             })
     }
 }

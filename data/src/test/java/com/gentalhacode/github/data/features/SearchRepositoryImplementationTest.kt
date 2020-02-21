@@ -21,7 +21,7 @@ class SearchRepositoryImplementationTest {
 
     private val remoteDataStore: SearchRemoteDataStore = mock()
     private val cacheDataStore: SearchCacheDataStore = mock()
-    private val dataFactory = SearchDataFactory(remoteDataStore)
+    private val dataFactory = SearchDataFactory(remoteDataStore, cacheDataStore)
     private val repositoryImpl = SearchRepositoryImplementation(dataFactory)
     private val isCached = randomBoolean()
     private val dummyDataRepositories = DataFactory.dummyDataRepositories()

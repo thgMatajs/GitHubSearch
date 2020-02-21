@@ -30,6 +30,7 @@
 - Improve error handling  
 - Include support to use a CI/CD platform (Circle CI, Bitrise, Fastlane)  
 - Change app to be used in 100% offline 
+- Maintain the position of the list when rotating the device
 - Implement ktlint
 - Implement detekt
 
