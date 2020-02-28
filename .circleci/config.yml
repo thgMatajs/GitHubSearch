@@ -54,11 +54,5 @@ workflows:
           - run:
               name: Run Lint Test
               command: ./gradlew lint
-          - run:
-              name: Generate all unit test reports
-              command: ./gradlew clean jacocoTestReport jacocoTestReportDebug --no-daemon
-          - run:
-              name: Upload reports to Codecov
-              command: bash <(curl -s https://codecov.io/bash -v)
           - store_artifacts:
               path: presentation/build/reports
