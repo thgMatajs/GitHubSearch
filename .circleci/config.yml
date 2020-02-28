@@ -19,13 +19,6 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "presentation/build.gradle" }}
       - run:
-          name: Run Presentation Module Unit Tests
-          command: ./gradlew :presentation:testDebugUnitTest
-      - store_artifacts:
-          path: presentation/build/reports
-      - store_test_results:
-          path: presentation/build/test-results
-      - run:
           name: Run Domain Module Unit Tests
           command: ./gradlew :domain:test
       - store_artifacts:
@@ -34,11 +27,18 @@ jobs:
           path: domain/build/test-results
       - run:
           name: Run Data Module Unit Tests
-          command: ./gradlew :data:testDebugUnitTest
+          command: ./gradlew :data:test
       - store_artifacts:
           path: data/build/reports
       - store_test_results:
           path: data/build/test-results
+      - run:
+          name: Run Remote Module Unit Tests
+          command: ./gradlew :remote:test
+      - store_artifacts:
+          path: remote/build/reports
+      - store_test_results:
+          path: remote/build/test-results
       - run:
           name: Run Lint Test
           command: ./gradlew lint
