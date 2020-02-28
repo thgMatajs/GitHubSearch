@@ -1,5 +1,8 @@
 
 # GitHub Search Repositories
+[![CircleCI](https://circleci.com/gh/thgcode0101/GitHubSearch.svg?style=svg)](https://circleci.com/gh/thgcode0101/GitHubSearch)
+[![Kotlin Version](https://img.shields.io/badge/kotlin-1.3.61-blue.svg)](http://kotlinlang.org/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
 #### Android app to search repositories in github.
     
