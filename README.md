@@ -16,6 +16,7 @@
  - **[Koin](https://insert-koin.io/)** (for Dependency Injection)  
  - **[coil](https://coil-kt.github.io/coil/getting_started/)** (for load images) 
  - **Mockito, JUnit4** for testing
+ - **CI/CD 
     
 ## Modules and their responsibilities
 - **model** - standardization of models using interfaces
@@ -30,8 +31,7 @@
 ## Next steps  
   
 - Implement more instrumentation and unit tests  
-- Improve error handling  
-- Include support to use a CI/CD platform (Circle CI, Bitrise, Fastlane)  
+- Improve error handling    
 - Change app to be used in 100% offline 
 - Maintain the position of the list when rotating the device
 - Add field to search by language and add filter option
