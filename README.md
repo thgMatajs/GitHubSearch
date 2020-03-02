@@ -16,7 +16,7 @@
  - **[Koin](https://insert-koin.io/)** (for Dependency Injection)  
  - **[coil](https://coil-kt.github.io/coil/getting_started/)** (for load images) 
  - **Mockito, JUnit4** for testing
- - **CI/CD 
+ - **CI/CD**
     
 ## Modules and their responsibilities
 - **model** - standardization of models using interfaces
