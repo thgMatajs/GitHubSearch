@@ -18,34 +18,16 @@ import com.gentalhacode.github.model.Repository
 /**
  * .:.:.:. Created by @thgMatajs on 17/02/20 .:.:.:.
  */
-class RepositoryAdapter : PagedListAdapter<Repository, RepositoryAdapter.ViewHolder>(
+class RepositoryAdapter : PagedListAdapter<Repository, RepositoryViewHolder>(
     repositoriesDiff
 ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.repository_item, parent, false)
-        return ViewHolder(view)
+        return RepositoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindView(getItem(position))
-
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindView(item: Repository?) {
-            itemView.apply {
-                findViewById<TextView>(R.id.repositoryItemName).text = item?.name
-                findViewById<TextView>(R.id.repositoryItemOwner).text = item?.owner?.name
-                findViewById<TextView>(R.id.repositoryItemStars).text = item?.totalStars.toString()
-                findViewById<TextView>(R.id.repositoryItemForks).text = item?.totalForks.toString()
-                findViewById<ImageView>(R.id.repositoryItemIv).load(item?.owner?.urlPhoto) {
-                    crossfade(true)
-                    size(130, 130)
-                    precision(Precision.AUTOMATIC)
-                    diskCachePolicy(CachePolicy.ENABLED)
-                    memoryCachePolicy(CachePolicy.ENABLED)
-                }
-            }
-        }
-    }
+    override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) = holder.bindView(getItem(position))
 
     companion object {
         val repositoriesDiff = object : DiffUtil.ItemCallback<Repository>() {
