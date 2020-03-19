@@ -19,7 +19,7 @@ import com.gentalhacode.github.model.Repository
  * .:.:.:. Created by @thgMatajs on 17/02/20 .:.:.:.
  */
 class RepositoryAdapter : PagedListAdapter<Repository, RepositoryViewHolder>(
-    repositoriesDiff
+    RepositoryDiffUtil()
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
@@ -28,22 +28,4 @@ class RepositoryAdapter : PagedListAdapter<Repository, RepositoryViewHolder>(
     }
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) = holder.bindView(getItem(position))
-
-    companion object {
-        val repositoriesDiff = object : DiffUtil.ItemCallback<Repository>() {
-            override fun areItemsTheSame(
-                oldItem: Repository,
-                newItem: Repository
-            ): Boolean {
-                return oldItem.toView().id == newItem.toView().id
-            }
-
-            override fun areContentsTheSame(
-                oldItem: Repository,
-                newItem: Repository
-            ): Boolean {
-                return oldItem.toView() == newItem.toView()
-            }
-        }
-    }
 }
